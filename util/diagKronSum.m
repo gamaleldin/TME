@@ -12,7 +12,7 @@
 %       - Ds: is a cell where each element contains the diagonal elements
 %       of each matrix.
 % Outputs:
-%       - kronSumLs: is the result of D1 \kronsum D2 .....\kronsum Dn
+%       - kronSumLs: is the result of Dn \kronsum Dn-1 .....\kronsum D1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [kronSumDs] = diagKronSum(Ds)
