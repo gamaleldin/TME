@@ -9,7 +9,7 @@
 startup
 rng('shuffle', 'twister') % randomize the seed
 
-surrogate_type = 'surrogate-TNC';
+surrogate_type = 'surrogate-T';
 % this data is a preprocessed version of the data available online from 
 % http://stat.columbia.edu/~cunningham/pdf/ChurchlandNature2012_code.zip
 load exampleData.mat 
@@ -23,15 +23,16 @@ times_msk = t>-50 & t<350; % select movement-related times
 numSurrogates = 100;
 params = [];
 
+
 if strcmp(surrogate_type, 'surrogate-T')
     params.margCov{1} = targetSigmaT;
-    params.margCov{2} = eye(size(dataTensor,2))*(trace(targetSigmaT)/size(dataTensor,2));
-    params.margCov{3} = eye(size(dataTensor,3))*(trace(targetSigmaT)/size(dataTensor,3));
+    params.margCov{2} = [];
+    params.margCov{3} = [];
     params.meanTensor = M.T;
 elseif strcmp(surrogate_type, 'surrogate-TN')
     params.margCov{1} = targetSigmaT;
     params.margCov{2} = targetSigmaN;
-    params.margCov{3} = eye(size(dataTensor,3))*(trace(targetSigmaT)/size(dataTensor,3));
+    params.margCov{3} = [];
     params.meanTensor = M.TN;
 elseif strcmp(surrogate_type, 'surrogate-TNC')
     params.margCov{1} = targetSigmaT;

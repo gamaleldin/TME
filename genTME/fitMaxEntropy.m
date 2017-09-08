@@ -37,8 +37,19 @@ dim = nan(tensorSize, 1);                                                  % ten
 eigVectors = cell(tensorSize, 1);                                          % eigenVectors of each of the specified marginal covariances
 eigValues = cell(tensorSize, 1);                                           % eigenValues of each of the specified marginal covariances
 trSigma = nan(tensorSize, 1);                                              % sum of each of the eigenValues of each of the specified marginal covariances
+dim = size(maxEntropy.meanTensor);
+for i = 1:tensorSize
+    if ~isempty(margCov{i})
+       Tr = trace(margCov{i});
+       break
+    end
+end
+
 for i = 1:tensorSize                                                       % load all the inputs
     Sigma = margCov{i};
+    if isempty(Sigma)
+        Sigma = eye(dim(i))*(trace(Tr)/dim(i));
+    end
     dim(i) = size(Sigma,1);
     [Q, S] = svd(Sigma);
     [S, ix] = sort(diag(S), 'descend');
