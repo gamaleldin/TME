@@ -9,7 +9,7 @@
 startup
 rng('shuffle', 'twister') % randomize the seed
 
-surrogate_type = 'surrogate-T';
+surrogate_type = 'surrogate-TNC';
 % this data is a preprocessed version of the data available online from 
 % http://stat.columbia.edu/~cunningham/pdf/ChurchlandNature2012_code.zip
 load exampleData.mat 
