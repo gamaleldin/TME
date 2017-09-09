@@ -48,9 +48,8 @@ end
 for i = 1:tensorSize                                                       % load all the inputs
     Sigma = margCov{i};
     if isempty(Sigma)
-        Sigma = eye(dim(i))*(trace(Tr)/dim(i));
+        Sigma = eye(dim(i))*(Tr/dim(i));
     end
-    dim(i) = size(Sigma,1);
     [Q, S] = svd(Sigma);
     [S, ix] = sort(diag(S), 'descend');
     Q = Q(:, ix);
@@ -61,8 +60,7 @@ end
 maxEntropy.eigVectors = eigVectors;
 %% the marginal covariances should all have the same trace (i.e. the sum of their eigenvalues should be equal)
 if ~(sum((trSigma-mean(trSigma))>=-(sum(dim)*sqrt(eps)) & (trSigma-mean(trSigma))<=(sum(dim)*sqrt(eps)))==length(trSigma))
-    display('Error: the covariance matrices should have exactly the same trace')
-    return                                                                 % abort if the marginal covariance specified are not correct
+    error('the covariance matrices should have exactly the same trace')
 end
 
 %%
